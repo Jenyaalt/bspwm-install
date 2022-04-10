@@ -70,13 +70,13 @@ ksuperkey -e 'Super_L=Alt_L|F1' &
 ksuperkey -e 'Super_R=Alt_L|F1' &
 
 # Enable power management
-xfce4-power-manager &
+# xfce4-power-manager &
 
 # Fix cursor
 xsetroot -cursor_name left_ptr
 
 # Restore wallpaper
-bash $HOME/.fehbg
+# bash $HOME/.fehbg
 
 # Start mpd
 exec mpd &

@@ -97,8 +97,8 @@ def pause():
 
 def show_welcome_screen():
     cprint('===========================================================', fg='y', style='b')
-    cprint(':: The Duck Channel´s bspwm Style ::', fg='g', style='b')
-    cprint('https://github.com/theduckchannel/bspwm-install', fg='c', style='b')
+    cprint(':: Install BSPWM ::', fg='g', style='b')
+    cprint('https://github.com/Jenyaalt/bspwm-install', fg='c', style='b')
     cprint('===========================================================', fg='y', style='b')
     pause()
 
@@ -111,9 +111,10 @@ def install_xorg():
 
 def install_lxdm(): 
     cprint('\r\n\r\n:: Installing Lxdm...', fg='y', style='b') 
+
     # install and enable lxdm   
     os.system('sudo pacman --noconfirm -S lxdm')
-    os.system('sudo systemctl enable lxdm')
+
     # Copy lxdm.conf to local copy
     os.system('cp /etc/lxdm/lxdm.conf .')
     os.system(f'sed -i "s/# autologin=dgod/autologin={username}/" lxdm.conf')
@@ -127,7 +128,7 @@ def install_lxdm():
 def install_packages():
     cprint('\r\n:: Installing Regular packages...', fg='y', style='b')
     regPkgs = ''
-    
+
     for pkg in cp['Regular']:
         regPkgs = regPkgs + pkg + ' '
 
@@ -148,8 +149,13 @@ def install_yay():
 
 def install_aur_packages():
     cprint('\r\n:: Installing AUR packages...', fg='y', style='b')
+    regPkgs = ''
+
     for pkg in cp['AUR']:
-        os.system(f'yay --noconfirm -S {pkg}')
+        regPkgs = regPkgs + pkg + ' '        
+
+    print(regPkgs)        
+    os.system(f'yay --noconfirm -S {pkg}')
     pause()
 
 
@@ -179,6 +185,8 @@ def enable_services():
     os.system('sudo systemctl enable NetworkManager.service')    
     # Bluetooth
     os.system('sudo systemctl enable bluetooth.service')
+   # lxdm
+    os.system('sudo systemctl enable lxdm')
     pause()
 
 
@@ -207,7 +215,7 @@ def main():
     show_welcome_screen()
     update_and_upgrade()
     install_xorg()
-    install_lxdm()
+    # install_lxdm()
     install_packages()
     install_yay()
     install_aur_packages()
