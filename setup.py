@@ -5,6 +5,7 @@ import configparser
 import time
 import subprocess as sp
 
+
 cp = configparser.ConfigParser(allow_no_value=True)
 cp.read('packages.ini')
 username = sp.getoutput('whoami')
@@ -81,36 +82,34 @@ def cprint( fmt, fg=None, bg=None, style=None ):
 
 
 
-def cmd(parameter):
-    os.system(parameter)
+# def cmd(parameter):
+#     os.system(parameter)
     
 
 def pause():
     time.sleep(3)
 
 
-def saveLxdmConf():
-    with open('lxdm.conf', 'w') as configfile:
-        lxdmCp.write(configfile)
+# def saveLxdmConf():
+#     with open('lxdm.conf', 'w') as configfile:
+#         lxdmCp.write(configfile)
 
 
-
-def showWelcomeScreen():
+def show_welcome_screen():
     cprint('===========================================================', fg='y', style='b')
     cprint(':: The Duck Channel´s bspwm Style ::', fg='g', style='b')
     cprint('https://github.com/theduckchannel/bspwm-install', fg='c', style='b')
     cprint('===========================================================', fg='y', style='b')
     pause()
 
- 
 
-def installXorg():
+def install_xorg():
     cprint('\r\n\r\n:: Installing xorg...', fg='y', style='b')    
     os.system('sudo pacman --noconfirm -S xorg')
     pause()
 
 
-def installLxdm(): 
+def install_lxdm(): 
     cprint('\r\n\r\n:: Installing Lxdm...', fg='y', style='b') 
     # install and enable lxdm   
     os.system('sudo pacman --noconfirm -S lxdm')
@@ -125,9 +124,10 @@ def installLxdm():
     pause()
     
 
-def installRegularPackages():
+def install_packages():
     cprint('\r\n:: Installing Regular packages...', fg='y', style='b')
     regPkgs = ''
+    
     for pkg in cp['Regular']:
         regPkgs = regPkgs + pkg + ' '
 
@@ -135,7 +135,8 @@ def installRegularPackages():
     os.system(f'sudo pacman --noconfirm -S {regPkgs}')
     pause()
 
-def installYayAurHelper():
+
+def install_yay():
     cprint('\r\n:: Install Yay AUR Helper...', fg='y', style='b')
     os.system('git clone https://aur.archlinux.org/yay.git') 
     os.chdir('yay')
@@ -144,17 +145,18 @@ def installYayAurHelper():
     os.system('rm -rf yay')
     pause()
 
-def installAurPkgs():
+
+def install_aur_packages():
     cprint('\r\n:: Installing AUR packages...', fg='y', style='b')
     for pkg in cp['AUR']:
         os.system(f'yay --noconfirm -S {pkg}')
-
     pause()
 
 
-def installDotFiles():
-    # if ~/.config not exists, so create
+def install_dot_files():
     cprint('\r\n:: Installing dotfiles...', fg='y', style='b')
+    
+    # if ~/.config not exists, so create 
     if(not os.path.isdir(f'/home/{username}/.config')):
         os.mkdir(f'/home/{username}/.config')
     
@@ -166,43 +168,54 @@ def installDotFiles():
     pause()
 
 
-def updateAndUpgrade():
+def update_and_upgrade():
     cprint('\r\n:: Update and Upgrading your system...', fg='y', style='b')
     os.system('sudo pacman --noconfirm -Syyu')
 
-def showFinalMessage():
+
+def enable_services(): 
+    cprint('\r\n\r\n:: Enabling services...', fg='y', style='b') 
+    # NetworkManager
+    os.system('sudo systemctl enable NetworkManager.service')    
+    # Bluetooth
+    os.system('sudo systemctl enable bluetooth.service')
+    pause()
+
+
+def show_final_message():
     cprint('\r\n:: Everything ok...', fg='y', style='b')
     input('Press any key to REBOOT!')
     os.system('reboot')
 
 
-def installGrubTheme():
+def install_grub_theme():
     cprint('\r\n:: Installing Grub Theme...', fg='y', style='b')
-    os.system(f'sudo cp -rf {os.getcwd()}/grub-themes/Vimix /boot/grub/themes')
+    os.system(f'sudo cp -rf {os.getcwd()}/grub-themes/XeroComp /boot/grub/themes')
     os.system(f'cp /etc/default/grub .')
-    os.system("sed -i 's/#GRUB_THEME=.*/GRUB_THEME=\"\/boot\/grub\/themes\/Vimix\/theme.txt\"/' grub") 
+    os.system("sed -i 's/#GRUB_THEME=.*/GRUB_THEME=\"\/boot\/grub\/themes\/XeroComp\/theme.txt\"/' grub") 
     os.system('sudo cp -f grub /etc/default/grub')
     os.system('sudo grub-mkconfig -o /boot/grub/grub.cfg')
     os.system('rm grub')
 
 
-def polyBarConfig():
+def config_polybar():
     cprint('\r\n:: Polybar Config...', fg='y', style='b')
     os.system('./polybar-config.sh')
     
 
 def main():
-    showWelcomeScreen()
-    updateAndUpgrade()
-    installXorg()
-    installLxdm()
-    installRegularPackages()
-    installYayAurHelper()
-    installAurPkgs()
-    installDotFiles()
-    installGrubTheme()
-    polyBarConfig()
-    showFinalMessage()
+    show_welcome_screen()
+    update_and_upgrade()
+    install_xorg()
+    install_lxdm()
+    install_packages()
+    install_yay()
+    install_aur_packages()
+    install_dot_files()
+    install_grub_theme()
+    enable_services()
+    config_polybar()
+    show_final_message()
     
 
 if __name__ == "__main__":
