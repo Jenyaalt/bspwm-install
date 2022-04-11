@@ -43,11 +43,11 @@ function install_packages(){
 
     while IFS= read -r CURRENT_LINE
         do
-            if [ $CURRENT_LINE == *"yay"* ]
+            if [[ $CURRENT_LINE == *"yay"* ]]
             then
-                yay -S "$CURRENT_LINE"
+                printf "yay -S $CURRENT_LINE"
             else
-                sudo pacman -S "$CURRENT_LINE"
+                printf "sudo pacman -S $CURRENT_LINE"
             fi
     done < packages.ini    
 }
