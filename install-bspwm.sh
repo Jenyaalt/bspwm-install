@@ -1,4 +1,4 @@
-me="$(whoami)"
+USERNAME="$(whoami)"
 
 
 function welcome() {
@@ -52,7 +52,7 @@ function install_yay_aur_helper() {
     printf "\nInstalling yay AUR helper:\n"
     cd %HOME
     git clone https://aur.archlinux.org/yay-git.git
-    sudo chown -R ${me}:${me} ./yay-git
+    sudo chown -R ${USERNAME}:${USERNAME} ./yay-git
     cd yay-git
     makepkg -si
     cd ..
