@@ -2,7 +2,7 @@ USERNAME="$(whoami)"
 
 
 function welcome() {
-    printf "\n\n=========================="    
+    printf "\n\n==========================\n"    
     printf ":: Install bwpwm ::\n"    
     printf "=========================="    
 }
@@ -10,7 +10,7 @@ function welcome() {
 
 function install_reflector() {
     printf "\n\nInstalling reflector:\n"
-    sudo pacman --noconfirm -S reflector
+    yes | sudo pacman -S reflector
     
     printf "\n\nConfigure reflector\n"
     sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
@@ -27,7 +27,7 @@ function update_and_upgrade() {
 
 function install_xorg() {
     printf "\n\nInstalling xorg:\n"
-    sudo pacman --noconfirm -S xorg
+    yes | sudo pacman -S xorg
 }
 
 
@@ -36,17 +36,17 @@ function install_video_drivers() {
     if [[ $MACHINE == *"Virtualization:"* ]]
     then
         printf "\n\nInstalling virtualbox drivers"
-        sudo pacman --noconfirm -S virtualbox-guest-utils xf86-video-fbdev
+        yes | sudo pacman -S virtualbox-guest-utils xf86-video-fbdev
     else
         printf "\n\nInstalling nvidia drivers and utils"
-        sudo pacman --noconfirm -S nvidia nvidia-utils
+        yes | sudo pacman -S nvidia nvidia-utils
     fi
 }
 
 
 function install_xorg() {
     printf "\n\nInstalling xorg:\n"
-    sudo pacman --noconfirm -S xorg
+    yes | sudo pacman -S xorg
 }
 
 
@@ -80,10 +80,10 @@ function install_packages(){
     done < packages.txt
 
     printf "\n\nInstalling regular packages:\n"
-    sudo pacman --noconfirm -S $REGULAR_PACKAGER
+    yes | sudo pacman -S $REGULAR_PACKAGER
     
     printf "\n\nInstalling AUR packages:\n"
-    yay --noconfirm -S $AUR_PACKAGES
+    yes | yay -S $AUR_PACKAGES
 }
 
 
