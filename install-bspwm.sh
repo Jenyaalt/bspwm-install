@@ -2,18 +2,20 @@ USERNAME="$(whoami)"
 
 
 function welcome() {
-    printf "\:: Install bwpwm ::\n"    
+    printf "=========================="    
+    printf "\n\n:: Install bwpwm ::\n"    
+    printf "=========================="    
 }
 
 
 function install_reflector() {
-    printf "\nInstalling reflector:\n"
+    printf "\n\nInstalling reflector:\n"
     sudo pacman --noconfirm -S reflector
     
-    printf "\nConfigure reflector\n"
+    printf "\n\nConfigure reflector\n"
     sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
 
-    printf "\nEnabling reflector:\n"
+    printf "\n\nEnabling reflector:\n"
     sudo systemctl enable reflector.service
 }
 
@@ -24,7 +26,7 @@ function update_and_upgrade() {
 
 
 function install_xorg() {
-    printf "\nInstalling xorg:\n"
+    printf "\n\nInstalling xorg:\n"
     sudo pacman --noconfirm -S xorg
 }
 
@@ -33,23 +35,23 @@ function install_video_drivers() {
     MACHINE="$(hostnamectl status)"
     if [[ $MACHINE == *"Virtualization:"* ]]
     then
-        echo "Installing virtualbox drivers"
+        printf "\n\nInstalling virtualbox drivers"
         sudo pacman --noconfirm -S virtualbox-guest-utils xf86-video-fbdev
     else
-        echo "Installing nvidia drivers and utils"
+        printf "\n\nInstalling nvidia drivers and utils"
         sudo pacman --noconfirm -S nvidia nvidia-utils
     fi
 }
 
 
 function install_xorg() {
-    printf "\nInstalling xorg:\n"
+    printf "\n\nInstalling xorg:\n"
     sudo pacman --noconfirm -S xorg
 }
 
 
 function install_yay_aur_helper() {
-    printf "\nInstalling yay AUR helper:\n"
+    printf "\n\nInstalling yay AUR helper:\n"
     cd %HOME
     git clone https://aur.archlinux.org/yay-git.git
     sudo chown -R ${USERNAME}:${USERNAME} ./yay-git
@@ -61,7 +63,7 @@ function install_yay_aur_helper() {
 
 
 function install_packages(){
-    printf "\nInstalling packages:\n"
+    printf "\n\nInstalling packages:\n"
 
     while IFS= read -r CURRENT_LINE
         do
@@ -69,11 +71,11 @@ function install_packages(){
             then
                 if [[ $CURRENT_LINE == *"yay"* ]]
                 then                
-                    PACKAGE=$(echo "$CURRENT_LINE" | sed 's/yay//')
-                    # echo "yay --noconfirm -S $PACKAGE"
+                    PACKAGE=$(printf "$CURRENT_LINE" | sed 's/yay//')
+                    # printf "yay --noconfirm -S $PACKAGE"
                     yay --noconfirm -S $PACKAGE
                 else
-                    # echo "sudo pacman --noconfirm -S $CURRENT_LINE"
+                    # printf "sudo pacman --noconfirm -S $CURRENT_LINE"
                     sudo pacman --noconfirm -S $CURRENT_LINE
                 fi
             fi
@@ -88,4 +90,3 @@ install_xorg
 install_video_drivers
 install_yay_aur_helper
 install_packages
-
