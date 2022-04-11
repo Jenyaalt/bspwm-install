@@ -12,7 +12,6 @@ lxappearance
 neofetch
 exa
 file-roller
-qpdfview
 reflector
 rsync
 curl

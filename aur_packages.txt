@@ -8,3 +8,4 @@ nerd-fonts-iosevka
 nerd-fonts-meslo
 siji-git
 ttf-material-icons-git
+qpdfview

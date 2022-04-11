@@ -49,7 +49,7 @@ function install_video_drivers() {
 
 
 function install_yay_aur_helper() {
-    echo "Installing yay AUR helper:\n"
+    echo "Installing yay AUR helper:"
     cd %HOME
     git clone https://aur.archlinux.org/yay-git.git
     sudo chown -R ${USERNAME}:${USERNAME} ./yay-git
@@ -86,17 +86,26 @@ function install_packages(){
 
 
 function post_install_config() {
-    echo "Enabling NetworkManager:\n"
+    echo "Enabling NetworkManager:"
     sudo systemctl enable NetworkManager.service
 
-    echo "Enabling bluetooth:\n"
+    echo "Enabling bluetooth:"
     sudo systemctl enable bluetooth.service
 
-    echo "Configure reflector\n"
+    echo "Configure reflector"
     sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
 
-    echo "Enabling reflector:\n"
+    echo "Enabling reflector:"
     sudo systemctl enable reflector.service        
+}
+
+function reboot() {
+
+    echo "====================================================="    
+    echo ":: Successfully installed! ::"    
+    echo "====================================================="    
+    read -p 'Press any key to reboot'
+    reboot
 }
 
 welcome
@@ -105,3 +114,4 @@ install_video_drivers
 install_yay_aur_helper
 install_packages
 post_install_config
+reboot
