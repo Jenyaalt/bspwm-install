@@ -4,51 +4,30 @@
 USERNAME="$(whoami)"
 
 
-func_install() {
-	if pacman -Qi $1 &> /dev/null; then
+function func_install() {
+    if pacman -Qi $1 &> /dev/null
+	then
 		tput setaf 2
   		echo "###############################################################################"
   		echo ":: The package "$1" is already installed"
-      	echo "###############################################################################"
-      	echo
-		tput sgr0
+        echo "###############################################################################"
+		tput sgr0    
 	else
-    	tput setaf 3
-    	echo "###############################################################################"
-    	echo ":: Installing package "  $1 
-    	echo "###############################################################################"
-    	echo
-    	tput sgr0
-    	$2
-    fi
+        tput setaf 3
+        echo "###############################################################################"
+        echo ":: Installing package "  $1 
+        echo "###############################################################################"
+        tput sgr0
+        $2
+	fi
 }
 
 
 function welcome() {
-    printf "\n\n==========================\n"    
-    printf ":: Install bwpwm ::\n"    
-    printf "=========================="    
-}
-
-
-function install_reflector(){
-    printf "\n\nInstall reflector:\n"
-    func_install "reflector"
-
-    printf "\n\nConfigure reflector\n"
-    sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
-
-    printf "\n\nEnabling reflector:\n"
-    sudo systemctl enable reflector.service    
-}
-
-
-function post_install_config() {
-    printf "\n\nEnabling NetworkManager:\n"
-    sudo systemctl enable NetworkManager.service
-
-    printf "\n\nEnabling bluetooth:\n"
-    sudo systemctl enable bluetooth.service
+    echo "==================="    
+    echo ":: Install bwpwm ::"    
+    echo "==================="    
+    echo
 }
 
 
@@ -60,17 +39,17 @@ function install_video_drivers() {
     MACHINE="$(hostnamectl status)"
     if [[ $MACHINE == *"Virtualization:"* ]]
     then
-        printf "\n\nInstalling virtualbox drivers"
+        echo "Installing virtualbox drivers"
         sudo pacman -S virtualbox-guest-utils xf86-video-fbdev
     else
-        printf "\n\nInstalling nvidia drivers and utils"
+        echo "Installing nvidia drivers and utils"
         sudo pacman -S nvidia nvidia-utils
     fi
 }
 
 
 function install_yay_aur_helper() {
-    printf "\n\nInstalling yay AUR helper:\n"
+    echo "Installing yay AUR helper:\n"
     cd %HOME
     git clone https://aur.archlinux.org/yay-git.git
     sudo chown -R ${USERNAME}:${USERNAME} ./yay-git
@@ -88,8 +67,8 @@ function install_packages(){
             then 
                 :
             else
-                INSTALL_SCRIPT=$(printf "sudo pacman -S --noconfirm --needed $CURRENT_LINE ")            
-                func_install $CURRENT_LINE $INSTALL_SCRIPT
+                INSTALL_SCRIPT=$(echo "sudo pacman -S --noconfirm --needed $CURRENT_LINE ")            
+                func_install "$CURRENT_LINE" "$INSTALL_SCRIPT"
             fi
     done < regular_packages.txt
 
@@ -99,15 +78,28 @@ function install_packages(){
             then 
                 :
             else
-                INSTALL_SCRIPT=$(printf "yay -S --noconfirm --needed $CURRENT_LINE ")
-                func_install $CURRENT_LINE $INSTALL_SCRIPT
+                INSTALL_SCRIPT=$(echo "yay -S --noconfirm --needed $CURRENT_LINE ")
+                func_install "$CURRENT_LINE" "$INSTALL_SCRIPT"
             fi
     done < aur_packages.txt    
 }
 
 
+function post_install_config() {
+    echo "Enabling NetworkManager:\n"
+    sudo systemctl enable NetworkManager.service
+
+    echo "Enabling bluetooth:\n"
+    sudo systemctl enable bluetooth.service
+
+    echo "Configure reflector\n"
+    sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
+
+    echo "Enabling reflector:\n"
+    sudo systemctl enable reflector.service        
+}
+
 welcome
-install_reflector
 update_and_upgrade
 install_video_drivers
 install_yay_aur_helper
