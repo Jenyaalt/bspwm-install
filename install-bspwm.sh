@@ -2,8 +2,8 @@ USERNAME="$(whoami)"
 
 
 function welcome() {
-    printf "=========================="    
-    printf "\n\n:: Install bwpwm ::\n"    
+    printf "\n\n=========================="    
+    printf ":: Install bwpwm ::\n"    
     printf "=========================="    
 }
 
@@ -64,6 +64,7 @@ function install_yay_aur_helper() {
 
 function install_packages(){
     printf "\n\nInstalling packages:\n"
+    printf "===================="
 
     while IFS= read -r CURRENT_LINE
         do
@@ -71,15 +72,18 @@ function install_packages(){
             then
                 if [[ $CURRENT_LINE == *"yay"* ]]
                 then                
-                    PACKAGE=$(printf "$CURRENT_LINE" | sed 's/yay//')
-                    # printf "yay --noconfirm -S $PACKAGE"
-                    yay --noconfirm -S $PACKAGE
+                    AUR_PACKAGES+=$(printf "$CURRENT_LINE " | sed 's/yay //')
                 else
-                    # printf "sudo pacman --noconfirm -S $CURRENT_LINE"
-                    sudo pacman --noconfirm -S $CURRENT_LINE
+                    REGULAR_PACKAGER+=$(printf "$CURRENT_LINE ")
                 fi
             fi
     done < packages.txt
+
+    printf "\n\nInstalling regular packages:\n"
+    sudo pacman --noconfirm -S $REGULAR_PACKAGER
+    
+    printf "\n\nInstalling AUR packages:\n"
+    yay --noconfirm -S $AUR_PACKAGES
 }
 
 
