@@ -1,4 +1,3 @@
-# [Regular]
 bspwm
 sxhkd
 rofi
@@ -31,13 +30,6 @@ zsh
 zoxide
 zsh-completions
 python-pygments
-; xfce4-appfinder
-; xfce4-panel
-; xfce4-power-manager
-; xfce4-session
-; xfce4-settings
-; xfce4-terminal
-; xorg-fonts-misc
 
 # Themes
 adapta-gtk-theme
@@ -46,7 +38,7 @@ papirus-icon-theme
 # Terminal
 alacritty
 
-# File Manager
+
 thunar
 thunar-archive-plugin
 thunar-media-tags-plugin
@@ -54,38 +46,37 @@ thunar-volman
 tumbler
 ffmpegthumbnailer
 
-# Network
+
 networkmanager
 network-manager-applet
 
-# Bluetooth
+
 bluez 
 bluez-utils 
 Blueberry
 
-# Audio
+
 pipewire
 pipewire-alsa
 pipewire-pulse
 pipewire-jack
 pavucontrol
 
-# Fonts
+
 ttf-fira-code
 noto-fonts
 ttf-roboto
 
 
-# [AUR]
+
 yay raw-thumbnailer
 yay google-chrome
 yay chroma-bin
 yay visual-studio-code-bin
 yay polybar
-xfce-polkit
-yay 
+yay xfce-polkit
 
-# Fonts
+
 yay nerd-fonts-iosevka
 yay nerd-fonts-meslo
 yay siji-git

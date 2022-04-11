@@ -1,8 +1,8 @@
 echo "Starting install process:"
 echo "=========================="
 
-USERNAME = whoami
-
+me="$(whoami)"
+echo "$me"
 
 function welcome() {
     printf "\:: Install bwpwm ::\n"    
@@ -43,13 +43,19 @@ function install_packages(){
 
     while IFS= read -r CURRENT_LINE
         do
-            if [[ $CURRENT_LINE == *"yay"* ]]
+            if [[ $CURRENT_LINE != "" ]]
             then
-                yay -S $CURRENT_LINE
-            else
-                sudo pacman -S $CURRENT_LINE
+                if [[ $CURRENT_LINE == *"yay"* ]]
+                then                
+                    PACKAGE=$(echo "$CURRENT_LINE" | sed 's/yay//')
+                    # echo "yay --noconfirm -S $PACKAGE"
+                    yay --noconfirm -S $PACKAGE
+                else
+                    # echo "sudo pacman --noconfirm -S $CURRENT_LINE"
+                    sudo pacman --noconfirm -S $CURRENT_LINE
+                fi
             fi
-    done < packages.ini    
+    done < packages.txt
 }
 
 
@@ -57,7 +63,7 @@ function install_yay_aur_helper() {
     printf "\nInstalling yay AUR helper:\n"
     cd %HOME
     git clone https://aur.archlinux.org/yay-git.git
-    sudo chown -R ${USERNAME}:${USERNAME} ./yay-git
+    sudo chown -R ${me}:${me} ./yay-git
     cd yay-git
     makepkg -si
     cd ..
