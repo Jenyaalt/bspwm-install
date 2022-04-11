@@ -6,24 +6,5 @@ import time
 import subprocess as sp
 
 
-cp = configparser.ConfigParser(allow_no_value=True)
-cp.read('packages.ini')
-username = sp.getoutput('whoami')
-
-
-
-
-def install_packages():
-    # cprint('\r\n:: Installing Regular packages...', fg='y', style='b')
-    regPkgs = ''
-
-    for pkg in cp['Regular']:
-        regPkgs = regPkgs + pkg + ' '
-
-    # os.system(f'sudo pacman --noconfirm -S {regPkgs}')
-    print(f'sudo pacman --noconfirm -S {regPkgs}')
-    # pause()
-
-
-
-install_packages()
+output_stream = os.popen('sudo pacman -Syyu')
+output_stream.close()

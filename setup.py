@@ -4,6 +4,12 @@ import sys
 import configparser
 import time
 import subprocess as sp
+import logging
+
+
+logger = logging.getLogger()
+handler = logging.FileHandler('log_file.log')
+logger.addHandler(handler)
 
 
 cp = configparser.ConfigParser(allow_no_value=True)
@@ -112,7 +118,7 @@ def install_xorg():
 def install_lxdm(): 
     cprint('\r\n\r\n:: Installing Lxdm...', fg='y', style='b') 
 
-    # install and enable lxdm   
+    # install lxdm   
     os.system('sudo pacman --noconfirm -S lxdm')
 
     # Copy lxdm.conf to local copy
