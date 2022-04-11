@@ -11,10 +11,10 @@ function welcome() {
 
 function init() {
     printf "\nInstalling reflector:\n"
-    sudo pacman -S reflector
+    sudo pacman --noconfirm -S reflector
     
     printf "\nConfigure reflector\n"
-    sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --sort rate --save /etc/pacman.d/mirrorlist
+    sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
 
     printf "\nEnabling reflector:\n"
     sudo systemctl enable reflector.service
@@ -23,7 +23,7 @@ function init() {
 
 function install_xorg() {
     printf "\nInstalling xorg:\n"
-    sudo pacman -S xorg
+    sudo pacman --noconfirm -S xorg
 }
 
 
