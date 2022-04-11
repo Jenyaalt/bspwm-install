@@ -73,6 +73,7 @@ volumeicon
 ttf-fira-code
 noto-fonts
 ttf-roboto
+nerd-fonts-iosevka
 # LAPTOP
 tlp
 # AUR 

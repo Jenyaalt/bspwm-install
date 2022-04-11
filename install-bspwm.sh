@@ -63,10 +63,8 @@ function install_yay_aur_helper() {
 function install_packages(){
     while IFS= read -r CURRENT_LINE
         do
-            if [[ "$CURRENT_LINE" == *"#"* ]]
+            if ! [[ "$CURRENT_LINE" == *"#"* ]]
             then 
-                :
-            else
                 INSTALL_SCRIPT=$(echo "sudo pacman -S --noconfirm --needed $CURRENT_LINE ")            
                 func_install "$CURRENT_LINE" "$INSTALL_SCRIPT"
             fi
@@ -74,12 +72,10 @@ function install_packages(){
 
     while IFS= read -r CURRENT_LINE
         do
-            if [[ "$CURRENT_LINE" == *"#"* ]]
+            if ! [[ "$CURRENT_LINE" == *"#"* ]]
             then 
-                :
-            else
                 INSTALL_SCRIPT=$(echo "yay -S --noconfirm --needed $CURRENT_LINE ")
-                func_install "$CURRENT_LINE" "$INSTALL_SCRIPT"
+                func_install "$CURRENT_LINE" "$INSTALL_SCRIPT"        
             fi
     done < aur_packages.txt    
 }

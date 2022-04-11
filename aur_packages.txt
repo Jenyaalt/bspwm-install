@@ -4,7 +4,6 @@ chroma-bin
 visual-studio-code-bin
 polybar
 xfce-polkit
-nerd-fonts-iosevka
 nerd-fonts-meslo
 siji-git
 ttf-material-icons-git
