@@ -77,8 +77,8 @@ function update_and_upgrade() {
 
 
 
-# welcome
-# init
-# update_and_upgrade
-# install_yay_aur_helper
+welcome
+init
+update_and_upgrade
+install_yay_aur_helper
 install_packages
