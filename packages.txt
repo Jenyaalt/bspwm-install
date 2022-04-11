@@ -1,4 +1,5 @@
 # BASE
+xorg
 bspwm
 sxhkd
 rofi
@@ -31,6 +32,7 @@ zsh
 zoxide
 zsh-completions
 python-pygments
+reflector
 # THEME
 adapta-gtk-theme
 # ICON THEME
