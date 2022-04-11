@@ -32,22 +32,22 @@ function welcome() {
 
 
 function install_reflector(){
-    printf "\n\nInstall reflector:"
+    printf "\n\nInstall reflector:\n"
     func_install "reflector"
 
-    printf "\n\nConfigure reflector"
+    printf "\n\nConfigure reflector\n"
     sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
 
-    printf "\n\nEnabling reflector:"
+    printf "\n\nEnabling reflector:\n"
     sudo systemctl enable reflector.service    
 }
 
 
 function post_install_config() {
-    printf "\n\nEnabling NetworkManager:"
+    printf "\n\nEnabling NetworkManager:\n"
     sudo systemctl enable NetworkManager.service
 
-    printf "\n\nEnabling bluetooth:"
+    printf "\n\nEnabling bluetooth:\n"
     sudo systemctl enable bluetooth.service
 }
 
@@ -112,3 +112,4 @@ update_and_upgrade
 install_video_drivers
 install_yay_aur_helper
 install_packages
+post_install_config
