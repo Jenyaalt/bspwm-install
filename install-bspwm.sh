@@ -88,25 +88,27 @@ function install_packages(){
             then 
                 :
             else
-                if [[ $CURRENT_LINE == *"*"* ]]
-                then                
-                    INSTALL_SCRIPT=$(printf "yay -S --noconfirm --needed $CURRENT_LINE " | sed 's/* //')
-                else
-                    INSTALL_SCRIPT=$(printf "sudo pacman -S --noconfirm --needed $CURRENT_LINE ")
-                fi
+                INSTALL_SCRIPT=$(printf "sudo pacman -S --noconfirm --needed $CURRENT_LINE ")            
+                func_install $CURRENT_LINE $INSTALL_SCRIPT
             fi
+    done < regular_packages.txt
 
-            func_install $CURRENT_LINE $INSTALL_SCRIPT
-        
-            # echo $INSTALL_SCRIPT
-
-    done < packages.txt
+    while IFS= read -r CURRENT_LINE
+        do
+            if [[ "$CURRENT_LINE" == *"#"* ]]
+            then 
+                :
+            else
+                INSTALL_SCRIPT=$(printf "yay -S --noconfirm --needed $CURRENT_LINE ")
+                func_install $CURRENT_LINE $INSTALL_SCRIPT
+            fi
+    done < aur_packages.txt    
 }
 
 
-# welcome
-# install_reflector
-# update_and_upgrade
-# install_video_drivers
-# install_yay_aur_helper
+welcome
+install_reflector
+update_and_upgrade
+install_video_drivers
+install_yay_aur_helper
 install_packages
