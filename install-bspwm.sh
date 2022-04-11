@@ -43,7 +43,12 @@ function install_packages(){
 
     while IFS= read -r CURRENT_LINE
         do
-            echo "$CURRENT_LINE"
+            if [ $CURRENT_LINE == *"yay"* ]
+            then
+                yay -S "$CURRENT_LINE"
+            else
+                sudo pacman -S "$CURRENT_LINE"
+            fi
     done < packages.ini    
 }
 
@@ -66,8 +71,8 @@ function update_and_upgrade() {
 
 
 
-welcome
-update_and_upgrade
+# welcome
 # init
-install_yay_aur_helper
+# update_and_upgrade
+# install_yay_aur_helper
 install_packages
