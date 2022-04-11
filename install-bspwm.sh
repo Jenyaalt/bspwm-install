@@ -1,15 +1,12 @@
-echo "Starting install process:"
-echo "=========================="
-
 me="$(whoami)"
-echo "$me"
+
 
 function welcome() {
     printf "\:: Install bwpwm ::\n"    
 }
 
 
-function init() {
+function install_reflector() {
     printf "\nInstalling reflector:\n"
     sudo pacman --noconfirm -S reflector
     
@@ -21,6 +18,11 @@ function init() {
 }
 
 
+function update_and_upgrade() {
+    sudo pacman -Syyuu
+}
+
+
 function install_xorg() {
     printf "\nInstalling xorg:\n"
     sudo pacman --noconfirm -S xorg
@@ -28,13 +30,33 @@ function install_xorg() {
 
 
 function install_video_drivers() {
-    hostnamectl status
+    MACHINE="$(hostnamectl status)"
+    if [[ $MACHINE == *"Virtualization:"* ]]
+    then
+        echo "Installing virtualbox drivers"
+        sudo pacman --noconfirm -S virtualbox-guest-utils xf86-video-fbdev
+    else
+        echo "Installing nvidia drivers and utils"
+        sudo pacman --noconfirm -S nvidia nvidia-utils
+    fi
 }
 
 
 function install_xorg() {
     printf "\nInstalling xorg:\n"
     sudo pacman --noconfirm -S xorg
+}
+
+
+function install_yay_aur_helper() {
+    printf "\nInstalling yay AUR helper:\n"
+    cd %HOME
+    git clone https://aur.archlinux.org/yay-git.git
+    sudo chown -R ${me}:${me} ./yay-git
+    cd yay-git
+    makepkg -si
+    cd ..
+    rm -rf yay yay-git
 }
 
 
@@ -59,26 +81,11 @@ function install_packages(){
 }
 
 
-function install_yay_aur_helper() {
-    printf "\nInstalling yay AUR helper:\n"
-    cd %HOME
-    git clone https://aur.archlinux.org/yay-git.git
-    sudo chown -R ${me}:${me} ./yay-git
-    cd yay-git
-    makepkg -si
-    cd ..
-    rm -rf yay yay-git
-}
-
-
-function update_and_upgrade() {
-    sudo pacman -Syyuu
-}
-
-
-
 welcome
-init
+install_reflector
 update_and_upgrade
+install_xorg
+install_video_drivers
 install_yay_aur_helper
 install_packages
+
