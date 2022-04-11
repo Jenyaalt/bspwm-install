@@ -96,17 +96,17 @@ function install_packages(){
                 fi
             fi
 
-            # func_install $CURRENT_LINE $INSTALL_SCRIPT
+            func_install $CURRENT_LINE $INSTALL_SCRIPT
         
-            echo $INSTALL_SCRIPT
+            # echo $INSTALL_SCRIPT
 
     done < packages.txt
 }
 
 
-welcome
-install_reflector
-update_and_upgrade
-install_video_drivers
-install_yay_aur_helper
+# welcome
+# install_reflector
+# update_and_upgrade
+# install_video_drivers
+# install_yay_aur_helper
 install_packages
