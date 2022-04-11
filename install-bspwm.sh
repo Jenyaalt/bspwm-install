@@ -45,9 +45,9 @@ function install_packages(){
         do
             if [[ $CURRENT_LINE == *"yay"* ]]
             then
-                printf "yay -S $CURRENT_LINE"
+                yay -S $CURRENT_LINE
             else
-                printf "sudo pacman -S $CURRENT_LINE"
+                sudo pacman -S $CURRENT_LINE
             fi
     done < packages.ini    
 }
