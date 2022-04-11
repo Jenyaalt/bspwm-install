@@ -1,3 +1,4 @@
+# BASE
 bspwm
 sxhkd
 rofi
@@ -30,56 +31,57 @@ zsh
 zoxide
 zsh-completions
 python-pygments
-
-# Themes
+# THEME
 adapta-gtk-theme
+# ICON THEME
 papirus-icon-theme
-
 # Terminal
 alacritty
-
-
+# FILE MANAGER
 thunar
 thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-volman
 tumbler
 ffmpegthumbnailer
-
-
+# NETWORK
 networkmanager
 network-manager-applet
-
-
-bluez 
-bluez-utils 
-Blueberry
-
-
-pipewire
-pipewire-alsa
-pipewire-pulse
-pipewire-jack
+# Bluetooth
+pulseaudio-bluetooth
+bluez
+bluez-libs
+bluez-utils
+blueberry
+# SOUND
+pulseaudio
+pulseaudio-alsa
 pavucontrol
-
-
+alsa-firmware
+alsa-lib
+alsa-plugins
+alsa-utils
+gstreamer
+gst-plugins-good
+gst-plugins-bad
+gst-plugins-base
+gst-plugins-ugly
+playerctl
+volumeicon
+# FONTS
 ttf-fira-code
 noto-fonts
 ttf-roboto
-
-
-
-yay raw-thumbnailer
-yay google-chrome
-yay chroma-bin
-yay visual-studio-code-bin
-yay polybar
-yay xfce-polkit
-
-
-yay nerd-fonts-iosevka
-yay nerd-fonts-meslo
-yay siji-git
-yay ttf-material-icons-git
-
-
+# LAPTOP
+tlp
+# AUR 
+* raw-thumbnailer
+* google-chrome
+* chroma-bin
+* visual-studio-code-bin
+* polybar
+* xfce-polkit
+* nerd-fonts-iosevka
+* nerd-fonts-meslo
+* siji-git
+* ttf-material-icons-git

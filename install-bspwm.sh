@@ -1,4 +1,27 @@
+#!/bin/bash
+
+
 USERNAME="$(whoami)"
+
+
+func_install() {
+	if pacman -Qi $1 &> /dev/null; then
+		tput setaf 2
+  		echo "###############################################################################"
+  		echo "################## The package "$1" is already installed"
+      	echo "###############################################################################"
+      	echo
+		tput sgr0
+	else
+    	tput setaf 3
+    	echo "###############################################################################"
+    	echo "##################  Installing package "  $1
+    	echo "###############################################################################"
+    	echo
+    	tput sgr0
+    	$1 
+    fi
+}
 
 
 function welcome() {
@@ -10,7 +33,7 @@ function welcome() {
 
 function install_reflector() {
     printf "\n\nInstalling reflector:\n"
-    yes | sudo pacman -S reflector
+    sudo pacman -S reflector
     
     printf "\n\nConfigure reflector\n"
     sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
@@ -27,7 +50,7 @@ function update_and_upgrade() {
 
 function install_xorg() {
     printf "\n\nInstalling xorg:\n"
-    yes | sudo pacman -S xorg
+    sudo pacman -S xorg
 }
 
 
@@ -36,17 +59,17 @@ function install_video_drivers() {
     if [[ $MACHINE == *"Virtualization:"* ]]
     then
         printf "\n\nInstalling virtualbox drivers"
-        yes | sudo pacman -S virtualbox-guest-utils xf86-video-fbdev
+        sudo pacman -S virtualbox-guest-utils xf86-video-fbdev
     else
         printf "\n\nInstalling nvidia drivers and utils"
-        yes | sudo pacman -S nvidia nvidia-utils
+        sudo pacman -S nvidia nvidia-utils
     fi
 }
 
 
 function install_xorg() {
     printf "\n\nInstalling xorg:\n"
-    yes | sudo pacman -S xorg
+    sudo pacman -S xorg
 }
 
 
@@ -63,27 +86,24 @@ function install_yay_aur_helper() {
 
 
 function install_packages(){
-    printf "\n\nInstalling packages:\n"
-    printf "===================="
-
     while IFS= read -r CURRENT_LINE
         do
-            if [[ $CURRENT_LINE != "" ]]
-            then
-                if [[ $CURRENT_LINE == *"yay"* ]]
+            if [[ "$CURRENT_LINE" == *"#"* ]]
+            then 
+                :
+            else
+                if [[ $CURRENT_LINE == *"*"* ]]
                 then                
-                    AUR_PACKAGES+=$(printf "$CURRENT_LINE " | sed 's/yay //')
+                    INSTALL_SCRIPT=$(printf "yay -S --noconfirm --needed $CURRENT_LINE " | sed 's/* //')
                 else
-                    REGULAR_PACKAGER+=$(printf "$CURRENT_LINE ")
+                    INSTALL_SCRIPT=$(printf "sudo pacman -S --noconfirm --needed $CURRENT_LINE ")
                 fi
             fi
-    done < packages.txt
 
-    printf "\n\nInstalling regular packages:\n"
-    yes | sudo pacman -S $REGULAR_PACKAGER
-    
-    printf "\n\nInstalling AUR packages:\n"
-    yes | yay -S $AUR_PACKAGES
+        func_install $INSTALL_SCRIPT
+        # echo $INSTALL_SCRIPT
+
+    done < packages.txt
 }
 
 
