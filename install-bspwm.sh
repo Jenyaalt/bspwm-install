@@ -106,6 +106,10 @@ function pre_install_config() {
 
 function install_config_files() {
     echo "Install configuration files:"
+    CURRENT_DIR="$(pwd)/.config/."
+    TARGET_DIR=$HOME/test/
+    mkdir -p $TARGET_DIR
+    cp -r $CURRENT_DIR $TARGET_DIR
 
 }
 
@@ -113,16 +117,16 @@ function install_config_files() {
 function reboot() {
     echo "====================================================="    
     echo ":: Successfully installed! ::"    
-    echo "====================================================="    njh c
+    echo "=====================================================" 
 }
 
 
-welcome
-pre_install_config
-update_and_upgrade
-install_video_drivers
-install_yay_aur_helper
-install_packages
-post_install_config
+# welcome
+# pre_install_config
+# update_and_upgrade
+# install_video_drivers
+# install_yay_aur_helper
+# install_packages
+# post_install_config
 install_config_files
-reboot
+# reboot
