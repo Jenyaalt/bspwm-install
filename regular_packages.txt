@@ -10,6 +10,8 @@ lxappearance
 neofetch
 vim
 reflector
+base-devel
+linux-headers
 
 # THEME
 adapta-gtk-theme
