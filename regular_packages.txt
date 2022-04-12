@@ -4,7 +4,6 @@ bspwm
 sxhkd
 rofi
 picom
-arandr
 nitrogen
 dunst
 lxappearance
@@ -23,15 +22,18 @@ alacritty
 
 # FILE MANAGER
 pcmanfm
+
 # NETWORK
 networkmanager
 network-manager-applet
+
 # Bluetooth
 pulseaudio-bluetooth
 bluez
 bluez-libs
 bluez-utils
 blueberry
+
 # SOUND
 pulseaudio
 pulseaudio-alsa
@@ -40,15 +42,11 @@ alsa-firmware
 alsa-lib
 alsa-plugins
 alsa-utils
-gstreamer
-gst-plugins-good
-gst-plugins-bad
-gst-plugins-base
-gst-plugins-ugly
-playerctl
 volumeicon
+
 # FONTS
 ttf-font-awesome
 ttf-ubuntu-font-family
+
 # LAPTOP
 tlp

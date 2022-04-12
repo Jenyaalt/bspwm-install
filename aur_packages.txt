@@ -1,10 +1,4 @@
-raw-thumbnailer
 google-chrome
-chroma-bin
 visual-studio-code-bin
 polybar
 xfce-polkit
-nerd-fonts-meslo
-siji-git
-ttf-material-icons-git
-qpdfview
