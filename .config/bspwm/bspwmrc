@@ -10,11 +10,14 @@ nitrogen --restore &
 nm-applet &
 
 pgrep -x sxhkd > /dev/null || sxhkd &
-bash $HOME/.screenlayout/screen.sh
+# bash $HOME/.screenlayout/screen.sh
+
+# Polybar
 $HOME/.config/polybar/launch.sh
 
 # Kill if already running
-killall -9 picom sxhkd dunst xfce4-power-manager ksuperkey
+# killall -9 picom sxhkd dunst xfce4-power-manager ksuperkey
+killall -9 picom sxhkd dunst ksuperkey
 
 # Launch notification daemon
 dunst -config $HOME/.config/dunstrc &
@@ -32,10 +35,10 @@ fi
 sxhkd &
 
 # Enable power management
-xfce4-power-manager &
+# xfce4-power-manager &
 
 # Start udiskie
-udiskie &
+# udiskie &
 
 # start compositor
 while pgrep -u $UID -x picom >/dev/null; do sleep 1; done

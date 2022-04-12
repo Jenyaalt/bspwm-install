@@ -4,47 +4,25 @@ bspwm
 sxhkd
 rofi
 picom
+arandr
 nitrogen
-wget
 dunst
-libfm
 lxappearance
 neofetch
-exa
-file-roller
-reflector
-rsync
-curl
 vim
-git
-os-prober
-gimp
-gthumb
-flameshot
-bpytop
-speedcrunch
-gvfs
-hugo
-libfido2
-openssh
-zsh
-zoxide
-zsh-completions
-python-pygments
 reflector
+
 # THEME
 adapta-gtk-theme
+
 # ICON THEME
 papirus-icon-theme
+
 # Terminal
 alacritty
+
 # FILE MANAGER
-thunar
-thunar-archive-plugin
-thunar-media-tags-plugin
-thunar-volman
-tumbler
-ffmpegthumbnailer
+pcmanfm
 # NETWORK
 networkmanager
 network-manager-applet
@@ -70,9 +48,7 @@ gst-plugins-ugly
 playerctl
 volumeicon
 # FONTS
-ttf-fira-code
-noto-fonts
-ttf-roboto
-ttf-iosevka-nerd
+ttf-font-awesome
+ttf-ubuntu-font-family
 # LAPTOP
 tlp
