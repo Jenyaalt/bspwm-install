@@ -51,7 +51,7 @@ function install_video_drivers() {
 
 
 function install_yay_aur_helper() {
-    if ! [[ pacman -Qi yay-git &> /dev/null ]]
+    if ! pacman -Qi yay-git &> /dev/null
     then 
         echo "Installing yay AUR helper:"
         cd %HOME
@@ -104,12 +104,16 @@ function pre_install_config() {
 }
 
 
+function install_config_files() {
+    echo "Install configuration files:"
+
+}
+
+
 function reboot() {
     echo "====================================================="    
     echo ":: Successfully installed! ::"    
-    echo "====================================================="    
-    read -p 'Press any key to reboot'
-    reboot
+    echo "====================================================="    njh c
 }
 
 
@@ -120,4 +124,5 @@ install_video_drivers
 install_yay_aur_helper
 install_packages
 post_install_config
+install_config_files
 reboot
