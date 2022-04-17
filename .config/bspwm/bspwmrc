@@ -68,6 +68,7 @@ workspaces
 
 # Run IBUS Deamon
 ibus-daemon -drxR
+setxkbmap -option grp:alt_shift_toggle il,us,ru &
 
 # workspace 1 (Terminals)
 declare -a terminal=(Alacritty Xfce4-terminal)

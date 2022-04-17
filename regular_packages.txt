@@ -9,6 +9,8 @@ xorg-xdpyinfo
 xorg-xinit
 
 ibus 
+dconf-editor 
+
 bspwm
 sxhkd
 rofi
