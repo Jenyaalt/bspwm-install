@@ -110,7 +110,12 @@ function install_config_files() {
     TARGET_DIR=$HOME/test/
     mkdir -p $TARGET_DIR
     cp -r $CURRENT_DIR $TARGET_DIR
+}
 
+
+function config_ibus() {
+    echo "Config IBUS"
+    sudo cp -r .environment /etc/environment
 }
 
 
@@ -121,12 +126,12 @@ function reboot() {
 }
 
 
-welcome
-pre_install_config
-update_and_upgrade
-install_video_drivers
-install_yay_aur_helper
-install_packages
-post_install_config
+# welcome
+# pre_install_config
+# update_and_upgrade
+# install_video_drivers
+# install_yay_aur_helper
+# install_packages
+# post_install_config
 install_config_files
-reboot
+# reboot

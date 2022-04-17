@@ -1,5 +1,14 @@
 # BASE
-xorg
+xorg-server
+xorg-xbacklight
+xorg-xrandr
+xorg-xsetroot
+xorg-xkill
+xorg-xinput
+xorg-xdpyinfo
+xorg-xinit
+
+ibus 
 bspwm
 sxhkd
 rofi
@@ -32,7 +41,6 @@ network-manager-applet
 # Bluetooth
 pulseaudio-bluetooth
 bluez
-bluez-libs
 bluez-utils
 blueberry
 
@@ -40,15 +48,11 @@ blueberry
 pulseaudio
 pulseaudio-alsa
 pavucontrol
-alsa-firmware
-alsa-lib
-alsa-plugins
-alsa-utils
-volumeicon
 
 # FONTS
-ttf-font-awesome
-ttf-ubuntu-font-family
+# ttf-font-awesome
+# ttf-ubuntu-font-family
+noto-fonts
 
 # LAPTOP
 tlp
