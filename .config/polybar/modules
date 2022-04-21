@@ -71,17 +71,18 @@ format-volume = <ramp-volume><label-volume>
 format-muted = <label-muted>
 format-muted-prefix = "  "
 format-muted-prefix-font = 2
-; format-muted-prefix-foreground = ${color.background}
-; format-muted-prefix-background = ${color.magenta}
+
+format-muted-prefix-foreground = ${color.white}
+; format-muted-prefix-background = ${color.white}
 
 label-volume = "%percentage%%  "
 label-muted = "Mute "
 
-; label-volume-background = ${color.magenta}
-; label-muted-background = ${color.magenta}
+; label-volume-background = ${color.white}
+; label-muted-background = ${color.white}
 
-; label-volume-foreground = ${color.background}
-; label-muted-foreground = ${color.background}
+label-volume-foreground = ${color.white}
+label-muted-foreground = ${color.white}
 
 ramp-volume-0 = "  "
 ramp-volume-1 = "  "
@@ -94,7 +95,7 @@ ramp-volume-7 = "  "
 ramp-volume-8 = "  "
 ramp-volume-9 = "  "
 ramp-volume-font = 2
-; ramp-volume-foreground = ${color.background}
+ramp-volume-foreground = ${color.white}
 ; ramp-volume-background = ${color.magenta}
 
 ramp-headphones-0 = "  "
@@ -121,7 +122,7 @@ format-discharging = <ramp-capacity><label-discharging>
 format-full = <label-full>
 format-full-prefix = "  "
 format-full-prefix-font = 2
-; format-full-prefix-foreground = ${color.background}
+format-full-prefix-foreground = ${color.white}
 ; format-full-prefix-background = ${color.blue}
 
 label-charging = "%percentage%% "
@@ -132,9 +133,9 @@ label-full = "%percentage%% "
 ; label-discharging-background = ${color.blue}
 ; label-full-background = ${color.blue}
 
-; label-charging-foreground = ${color.background}
-; label-discharging-foreground = ${color.background}
-; label-full-foreground = ${color.background}
+label-charging-foreground = ${color.white}
+label-discharging-foreground = ${color.white}
+label-full-foreground = ${color.white}
 
 ramp-capacity-0 = "  "
 ramp-capacity-1 = "  "
@@ -142,7 +143,7 @@ ramp-capacity-2 = "  "
 ramp-capacity-3 = "  "
 ramp-capacity-4 = "  "
 ramp-capacity-font = 2
-; ramp-capacity-foreground = ${color.background}
+ramp-capacity-foreground = ${color.white}
 ; ramp-capacity-background = ${color.blue}
 
 animation-charging-0 = "  "
@@ -151,7 +152,7 @@ animation-charging-2 = "  "
 animation-charging-3 = "  "
 animation-charging-4 = "  "
 animation-charging-font = 2
-; animation-charging-foreground = ${color.background}
+animation-charging-foreground = ${color.white}
 ; animation-charging-background = ${color.blue}
 animation-charging-framerate = 750
 
@@ -169,43 +170,47 @@ reverse-scroll = true
 
 fuzzy-match = true
 
+ws-icon-0=I;
+ws-icon-1=II;
+ws-icon-2=III;
+ws-icon-3=IV;
+ws-icon-4=V;
+ws-icon-5=VI;
+ws-icon-6=VII;漣
+ws-icon-default = 
 
-ws-icon-0=I;
-ws-icon-1=II;
-ws-icon-2=III;
-ws-icon-3=IV;
-ws-icon-4=V;
-ws-icon-5=VI;
-ws-icon-6=VII;
-ws-icon-default = 
+format = <label-state>
+format-font = 2
 
-format = <label-state> <label-mode>
 label-monitor = %name%
 
-label-dimmed-foreground = ${color.blue}
-label-dimmed-focused-background = ${color.background}
-; label-dimmed-underline = ${bar/top.background}
-
-label-focused = %icon%
-label-focused-foreground = ${color.green}
+label-focused = %name%
+label-focused-foreground = ${color.blue}
 label-focused-background = ${color.background}
-label-focused-underline = ${color.green}
+label-focused-underline =  ${color.blue}
+label-focused-padding = 1
 
-label-occupied = %icon%
+label-occupied = %name%
+label-occupied-foreground = ${color.green}
+label-occupied-background = ${color.background}
+;label-occupied-underline = 
+label-occupied-padding = 1
 
-label-urgent = %icon%
+label-urgent = %name%
 label-urgent-foreground = ${color.red}
 label-urgent-background = ${color.background}
-; label-urgent-underline = #9b0a20
+label-urgent-underline =  ${color.red}
+label-urgent-padding = 1
 
-
-label-empty = %icon%
-label-empty-foreground = #55
+label-empty = %name%
+label-empty-foreground = ${color.foreground}
+label-empty-padding = 1
 
 ; Separator in between workspaces
-label-separator = " "
-label-separator-padding = 1
-label-separator-foreground = 
+label-separator = "∙"
+label-separator-padding = 0
+label-separator-foreground = ${color.altblack} 
+
 
 
 ;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
@@ -237,8 +242,8 @@ type = internal/cpu
 interval = 2
 format-prefix = "  "
 format-padding = 0
-; format-prefix-foreground = ${color.background}
-; format-foreground = ${color.background}
+format-prefix-foreground = ${color.white}
+format-foreground = ${color.white}
 ; format-background = ${color.green}
 label = "%{A1:terminal -e gtop &:}%percentage%% %{A}  "
 
@@ -252,11 +257,11 @@ time = "%I:%M %p"
 time-alt = "%A, %m/%d/%y"
 
 format-prefix = 
-; format-prefix-foreground = ${color.background}
+format-prefix-foreground = ${color.white}
 ; format-prefix-background = ${color.blue}
 
 label = %time%
-; label-foreground = ${color.background}
+label-foreground = ${color.white}
 ; label-background = ${color.blue}
 label-padding = 1
 
@@ -271,17 +276,17 @@ fixed-values = true
 
 format-mounted = <label-mounted>
 format-mounted-prefix = ""
-; format-mounted-prefix-foreground = ${color.background}
+format-mounted-prefix-foreground = ${color.white}
 ; format-mounted-prefix-background = ${color.cyan}
 
 format-unmounted = <label-unmounted>
 format-unmounted-prefix = ""
-; format-unmounted-prefix-foreground = ${color.background}
+format-unmounted-prefix-foreground = ${color.white}
 ; format-unmounted-prefix-background = ${color.cyan}
 
 label-mounted = "%{A1:terminal -e ncdu &:} %free%%{A} "
 label-unmounted = "%mountpoint%: NA "
-; label-mounted-foreground = ${color.background}
+label-mounted-foreground = ${color.white}
 
 ; label-mounted-background = ${color.cyan}
 ; label-unmounted-background = ${color.cyan}
@@ -294,9 +299,9 @@ type = internal/memory
 interval = 1
 
 format = <label>
-format-prefix = ""
-; format-prefix-foreground = ${color.background}
-; format-foreground = ${color.background}
+format-prefix = ""
+format-prefix-foreground = ${color.white}
+format-foreground = ${color.white}
 ; format-background = ${color.yellow}
 
 label = "%{A1:terminal -e htop &:} %mb_used% %{A}  "
@@ -305,9 +310,9 @@ label = "%{A1:terminal -e htop &:} %mb_used% %{A}  "
 
 [module/launcher]
 type=custom/text
-content = "  "
-content-font = 10
-; content-foreground= ${color.background}
+content = "  "
+content-font = 4
+content-foreground= ${color.white}
 ; content-background = ${color.blue} 
 content-padding = 0
 click-left=def-dmenu

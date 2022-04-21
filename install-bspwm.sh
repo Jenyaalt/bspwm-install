@@ -112,8 +112,8 @@ function install_config_files() {
     cp -r $CURRENT_DIR $TARGET_DIR
 
     echo "Install fonts:"
-    mkdir -p /usr/share/fonts/TTF/
-    cp -r ./fonts/* /usr/share/fonts/TTF/
+    sudo mkdir -p /usr/share/fonts/TTF/
+    sudo cp -r ./fonts/* /usr/share/fonts/TTF/
 }
 
 
