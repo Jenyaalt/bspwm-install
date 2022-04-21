@@ -126,12 +126,12 @@ function reboot() {
 }
 
 
-# welcome
-# pre_install_config
-# update_and_upgrade
-# install_video_drivers
-# install_yay_aur_helper
-# install_packages
-# post_install_config
+welcome
+pre_install_config
+update_and_upgrade
+install_video_drivers
+install_yay_aur_helper
+install_packages
+post_install_config
 install_config_files
-# reboot
+reboot
