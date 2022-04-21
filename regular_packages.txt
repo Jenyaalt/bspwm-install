@@ -24,6 +24,8 @@ reflector
 base-devel
 bash-comletion
 linux-headers
+numlockx
+volumeicon4
 
 # THEME
 adapta-gtk-theme
@@ -32,10 +34,12 @@ adapta-gtk-theme
 papirus-icon-theme
 
 # Terminal
-alacritty
+xfce4-terminal
 
 # FILE MANAGER
-pcmanfm
+thunar
+thunar-volman
+thunar-archive-plugin
 
 # NETWORK
 networkmanager
@@ -46,6 +50,7 @@ pulseaudio-bluetooth
 bluez
 bluez-utils
 blueberry
+blueberry-tray
 
 # SOUND
 pulseaudio

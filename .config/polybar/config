@@ -60,9 +60,9 @@ font-4 = "Source Code Pro Bold:size=13;3"
 
 
 # Default
-modules-left = launcher spacing bspwm
+modules-left = launcher bspwm
 modules-center = time
-modules-right = volume battery brightness sep cpu memory filesystem sep
+modules-right = battery brightness sep cpu memory filesystem sep
 
 spacing = 0
 dim-value = 1.0

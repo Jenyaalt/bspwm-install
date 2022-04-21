@@ -21,7 +21,7 @@ bspc config active_border_color     "#444b6a"
 #
 
 # Kill if already running
-killall -9 picom sxhkd dunst ksuperkey
+killall -9 picom sxhkd dunst ksuperkey volumeicon
 
 # sxhkd
 pgrep -x sxhkd > /dev/null || sxhkd &
@@ -43,6 +43,12 @@ nitrogen --restore &
 
 # Network manager
 nm-applet &
+
+# Volumeicon
+volumeicon &
+
+# numlockx
+numlockx on &
 
 # Launch notification daemon
 dunst -config $HOME/.config/dunstrc &
