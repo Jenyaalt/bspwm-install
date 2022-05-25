@@ -92,6 +92,9 @@ function post_install_config() {
 
     echo "Enabling bluetooth:"
     sudo systemctl enable bluetooth.service     
+
+    echo "Clean cache"
+    sudo fc-cache -f -v    
 }
 
 
@@ -117,15 +120,15 @@ function install_config_files() {
 }
 
 
-# function config_ibus() {
-#     echo "Config IBUS"
-#     sudo cp -r .environment /etc/environment
-# }
+function config_ibus() {
+    echo "Config IBUS"
+    sudo cp -r .environment /etc/environment
+}
 
 
-function reboot() {
+function complete_message() {    
     echo "====================================================="    
-    echo ":: Successfully installed! ::"    
+    echo ":: Successfully installed, You can reboot now ::"    
     echo "=====================================================" 
 }
 
@@ -138,4 +141,5 @@ install_yay_aur_helper
 install_packages
 post_install_config
 install_config_files
-reboot
+config_ibus
+complete_message
