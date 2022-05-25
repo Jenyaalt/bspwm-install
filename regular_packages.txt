@@ -17,7 +17,7 @@ rofi
 picom
 nitrogen
 dunst
-lxappearance
+lxappearance-gtk3
 neofetch
 vim
 reflector
