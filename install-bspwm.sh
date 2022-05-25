@@ -106,10 +106,10 @@ function pre_install_config() {
 
 function install_config_files() {
     echo "Install configuration files:"
-    CURRENT_DIR="./.config/."
-    TARGET_DIR=$HOME/.config/
+    CURRENT_DIR=".config/*"
+    TARGET_DIR="~/.config/"
     mkdir -p $TARGET_DIR
-    cp -r $CURRENT_DIR $TARGET_DIR
+    cp -R $CURRENT_DIR $TARGET_DIR
 
     echo "Install fonts:"
     sudo mkdir -p /usr/share/fonts/TTF/

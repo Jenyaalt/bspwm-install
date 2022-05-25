@@ -40,6 +40,8 @@ xfce4-terminal
 thunar
 thunar-volman
 thunar-archive-plugin
+thunar-media-tags-plugin
+file-roller
 
 # NETWORK
 networkmanager
