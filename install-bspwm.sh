@@ -31,9 +31,17 @@ function welcome() {
 }
 
 
-function update_and_upgrade() {
+function pre_install_config() {    
+    echo "Configure reflector"
+    sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
+
+    echo "Enabling reflector:"
+    sudo systemctl enable reflector.service        
+
+    echo "Update and upgrade:"
     sudo pacman -Syyuu
 }
+
 
 function install_video_drivers() {
     MACHINE="$(hostnamectl status)"
@@ -93,36 +101,27 @@ function post_install_config() {
     echo "Enabling bluetooth:"
     sudo systemctl enable bluetooth.service     
 
-    echo "Clean cache"
+    echo "Clean cache:"
     sudo fc-cache -f -v    
 }
 
 
-function pre_install_config() {    
-    echo "Configure reflector"
-    sudo reflector -c Belarus -c Poland -c Latvia -c Lithuania -c Russia -c Ukrain -a 12 -p https -p http --save /etc/pacman.d/mirrorlist
-
-    echo "Enabling reflector:"
-    sudo systemctl enable reflector.service        
-}
-
-
-function install_config_files() {
-    echo "Install configuration files:"
+function copy_config_files() {
+    echo "Copy configuration files:"
     CURRENT_DIR=".config/*"
     TARGET_DIR="~/.config/"
     mkdir -p $TARGET_DIR
     cp -R $CURRENT_DIR $TARGET_DIR
 
-    echo "Install fonts:"
+    chmod -R +x ~/.config/bspwm
+    chmod -R +x ~/.config/polybar
+
+    echo "Copy fonts:"
     sudo mkdir -p /usr/share/fonts/TTF/
-    sudo cp -r ./fonts/* /usr/share/fonts/TTF/
-}
+    sudo cp -R ./fonts/* /usr/share/fonts/TTF/
 
-
-function config_ibus() {
     echo "Config IBUS"
-    sudo cp -r .environment /etc/environment
+    sudo cp -R .environment /etc/environment        
 }
 
 
@@ -135,11 +134,9 @@ function complete_message() {
 
 welcome
 pre_install_config
-update_and_upgrade
 install_video_drivers
 install_yay_aur_helper
 install_packages
 post_install_config
-install_config_files
-config_ibus
+copy_config_files
 complete_message
