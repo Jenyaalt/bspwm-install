@@ -22,10 +22,10 @@ neofetch
 vim
 reflector
 base-devel
-bash-comletion
+bash-completion
 linux-headers
 numlockx
-volumeicon4
+volumeicon
 
 # THEME
 adapta-gtk-theme
@@ -52,7 +52,6 @@ pulseaudio-bluetooth
 bluez
 bluez-utils
 blueberry
-blueberry-tray
 
 # SOUND
 pulseaudio
